@@ -12,6 +12,7 @@ phases:
       - echo "pre_build"
       - npm run build
       - npm run export
+      - aws s3 sync build/ s3://test-code-build-wilf
   post_build:
     commands:
       - echo "Finishing up"
