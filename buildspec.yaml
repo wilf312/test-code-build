@@ -2,16 +2,13 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 14
     commands:
-      - echo "initializing"
-pre-build:
-  commands:
-    - echo "Installing node_modules"
-    - npm install
-build:
-  commands:
-    - echo "Creating build"
-    - npm run build && aws s3 sync out/ s3://saana-cicd-react
-post_build:
-  commands:
-    - echo "Finishing up"
+      - npm install
+  pre_build:
+    commands:
+      - npm run export
+  post_build:
+    commands:
+      - echo "Finishing up"
